@@ -1,5 +1,5 @@
 import { Client, Account, ID } from "appwrite";
-import conf from "../conf/conf";
+import conf from "../conf/conf.js";
 
 
 
@@ -39,7 +39,7 @@ class AuthService{
         }
     }
 
-    async verify(){
+    async getCurrentUser(){
 
         try{
             return await this.account.get();
@@ -65,5 +65,5 @@ const authService = new AuthService();
 
     
 
-return authService;
+export default authService;
 
