@@ -21,7 +21,7 @@ class AuthService{
        try{
         const userAccount = await this.account.create(ID.unique(), email, password,name);
         if(userAccount){
-            this.login({email,password});
+          return  this.login({email,password});
         }else{
             return userAccount;
         }
@@ -33,7 +33,7 @@ class AuthService{
 
     async login({email,password}){
         try{
-          return await this.account.createEmailSession(email, password);
+          return await this.account.createEmailPasswordSession(email, password);
         }catch(err){
             throw err;
         }
@@ -52,9 +52,9 @@ class AuthService{
 
     async logout(){
         try{
-            await account.deleteSessions();
+            await this.account.deleteSessions();
         }catch(err){
-            console.log("Appwrite service :: logout :: error", error);
+            console.log("Appwrite service :: logout :: error", err);
         }
     }
 

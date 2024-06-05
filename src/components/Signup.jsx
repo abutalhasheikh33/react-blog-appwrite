@@ -4,10 +4,11 @@ import { useNavigate,Link } from "react-router-dom"
 import {Button,Input,Logo} from './index';
 import { useDispatch } from "react-redux";
 import {useForm} from "react-hook-form"
+import { login } from "../store/authSlice";
 
 function Signup() {
     const navigate = useNavigate()
-    const [error,setError] = setError()
+    const [error,setError] = useState()
     const dispatch = useDispatch();
     const {register,handleSubmit} = useForm()
 
@@ -15,9 +16,12 @@ function Signup() {
     const create = async(data) => {
         setError("");
         try {
+            console.log(data)
           const userData =  await authService.createAccount(data);
+          
           if(userData){
             const userData = await authService.getCurrentUser();
+            console.log(userData)
             if(userData){
                 dispatch(login(userData));
             }
